@@ -8,18 +8,18 @@
 int main(int argc, char* argv[]) {
 	sem_t *sem1;
 	sem_t *sem2;
-	char *name1 = "/100";
-	char *name2 = "/200";
-	sem1 = sem_open(name1, O_CREAT | O_EXCL, O_RDWR, 0); //O_EXCL - если семафор с таким названием уже есть то вернется ошибка
+	char *name1 = "/sem1";
+	char *name2 = "/sem2";
+	sem1 = sem_open(name1, O_CREAT | O_EXCL, O_RDWR, 0); //O_EXCL - РµСЃР»Рё РёРјСЏ С‚Р°РєРѕРµ СѓР¶Рµ РµСЃС‚СЊ С‚Рѕ РІРµСЂРЅРµС‚СЃСЏ РѕС€РёР±РєР°
 	sem2 = sem_open(name2, O_CREAT | O_EXCL, O_RDWR, 1);
-	int n = 3; //сколько логов надо
+	int n = 3; //СЃРєРѕР»СЊРєРѕ Р»РѕРіРѕРІ РЅР°РґРѕ
 	if(fork()) {
 		for(int i = 0; i<=n; i++){
-			sem_wait(sem1); //уменьшаем(блокируем)
-			FILE *f = fopen("log.txt", "a+");
-			fprintf(f, "Log %d\n", getpid()); //типа лог записываем
-			fclose(f);
-			sem_post(sem2); //увеличиваем
+			sem_wait(sem1); //СѓРјРµРЅСЊС€Р°РµРј(Р±Р»РѕРєРёСЂСѓРµРј)
+			FILE *f = fopen("log.txt", "a+"); //РѕС‚РєСЂС‹С‚СЊ
+			fprintf(f, "Log %d\n", getpid()); //С‚РёРїР° Р»РѕРі
+			fclose(f); //Р·Р°РєСЂС‹С‚СЊ
+			sem_post(sem2); //СѓРІРµР»РёС‡РёРІР°РµРј
 		}
 	} 
 	else {
