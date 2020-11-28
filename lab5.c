@@ -15,7 +15,7 @@ void main(int argc, char* argv[]) {
 
         char str[] = "text TEXT te2Xt"; 
         close(fdpipe[0]); /*закрывает неиспользуемый конец для чтения */
-        write(fdpipe[1], outstring, sizeof(string));
+        write(fdpipe[1], str, sizeof(string));
 
     }
     else { 
