@@ -26,6 +26,5 @@ void main(int argc, char* argv[]) {
         {
             printf("%c", toupper(text[counter]));
         }
-        printf("\n");
     }
 }
